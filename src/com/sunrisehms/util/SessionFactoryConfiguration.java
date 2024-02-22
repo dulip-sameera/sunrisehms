@@ -1,6 +1,9 @@
 
 package com.sunrisehms.util;
 
+import com.sunrisehms.entity.LogEntity;
+import com.sunrisehms.entity.PrivilegeEntity;
+import com.sunrisehms.entity.TaskEntity;
 import com.sunrisehms.entity.UserEntity;
 import com.sunrisehms.entity.UserStatusEntity;
 import org.hibernate.Session;
@@ -15,7 +18,10 @@ public class SessionFactoryConfiguration {
     private SessionFactoryConfiguration() {
         Configuration configuration = new Configuration().configure("/com/sunrisehms/hibernate.cfg.xml")
                 .addAnnotatedClass(UserEntity.class)
-                .addAnnotatedClass(UserStatusEntity.class);
+                .addAnnotatedClass(UserStatusEntity.class)
+                .addAnnotatedClass(TaskEntity.class)
+                .addAnnotatedClass(PrivilegeEntity.class)
+                .addAnnotatedClass(LogEntity.class);
         sessionFactory = configuration.buildSessionFactory();
     }
     
