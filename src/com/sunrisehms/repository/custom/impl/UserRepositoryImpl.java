@@ -35,4 +35,18 @@ public class UserRepositoryImpl implements UserRepository{
         Query query = session.createQuery(hql);
         return query.list();
     }
+
+    @Override
+    public UserEntity getByUserName(Session session, String username) throws Exception {
+        String hql = "FROM UserEntity u WHERE u.userName=:user_name";
+        Query query = session.createQuery(hql);
+        query.setParameter("user_name", username);
+        List<UserEntity> users = query.list();
+        
+        if(!users.isEmpty()) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
 }
