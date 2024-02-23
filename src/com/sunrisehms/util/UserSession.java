@@ -24,4 +24,13 @@ public class UserSession {
     public void setUser(UserDto user) {
         this.user = user;
     }
+    
+    public void removeUser() {
+        this.user = null;
+    }
+    
+    public void removeSession() {
+        removeUser();
+        userSession = null;
+    }
 }
