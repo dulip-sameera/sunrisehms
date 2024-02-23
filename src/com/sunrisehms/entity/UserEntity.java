@@ -1,7 +1,6 @@
 
 package com.sunrisehms.entity;
 
-import com.sunrisehms.entity.embedded.UserAddress;
 import com.sunrisehms.entity.embedded.UserName;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -32,11 +31,6 @@ public class UserEntity {
     private Long id;
     
     private UserName name;
-    
-    private UserAddress address;
-    
-    @Column(name = "nic", nullable = false, unique = true)
-    private String nic;
     
     @Column(name = "job_title", nullable = false)
     private String jobTitle;
