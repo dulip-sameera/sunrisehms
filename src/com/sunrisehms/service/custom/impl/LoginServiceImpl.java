@@ -8,7 +8,7 @@ import com.sunrisehms.entity.TaskEntity;
 import com.sunrisehms.entity.UserEntity;
 import com.sunrisehms.enums.RepositoryType;
 import com.sunrisehms.enums.Task;
-import com.sunrisehms.exception.FialedToSaveTheLogException;
+import com.sunrisehms.exception.FailedToSaveTheLogException;
 import com.sunrisehms.exception.WrongPassword;
 import com.sunrisehms.repository.RepositoryFactory;
 import com.sunrisehms.repository.custom.LogRepository;
@@ -68,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
                         return userDto;
                     } else {
                         transaction.rollback();
-                        throw new FialedToSaveTheLogException("Failed saving the log");
+                        throw new FailedToSaveTheLogException("Failed saving the log");
                     }
 
                 } else {
@@ -104,7 +104,7 @@ public class LoginServiceImpl implements LoginService {
                 transaction.commit();
             } else {
                 transaction.rollback();
-                throw new FialedToSaveTheLogException("Failed saving the log");
+                throw new FailedToSaveTheLogException("Failed saving the log");
             }
 
         } catch (Exception e) {
