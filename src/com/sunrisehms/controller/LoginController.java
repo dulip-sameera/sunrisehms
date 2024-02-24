@@ -14,11 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
     
@@ -52,6 +57,15 @@ public class LoginController implements Initializable{
             txtPassword.setText("");
             txtUserName.setText("");
             UserSession.getInstance().setUser(user);
+            
+            // open dashboard view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/DashboardView.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+            
         } catch (WrongPassword wp) {
             lblMessage.setText("Incorrect password!");
             lblMessage.setVisible(true);
