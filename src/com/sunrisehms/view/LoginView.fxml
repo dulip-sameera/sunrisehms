@@ -15,7 +15,7 @@
          <children>
             <Label alignment="CENTER" style="-fx-text-fill: #12372A;" text="Sunrise Hotel" textFill="#12372a">
                <font>
-                  <Font name="Ink Free" size="48.0" />
+                  <Font name="System Bold" size="48.0" />
                </font>
             </Label>
             <Group layoutY="99.0">
