@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="607.0" prefWidth="946.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.LoginController">
+<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="1500.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.LoginController">
    <children>
-      <Group layoutX="338.0" layoutY="179.0" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="338.4921875" AnchorPane.topAnchor="179.0">
+      <Group layoutX="615.0" layoutY="267.0" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="615.0" AnchorPane.rightAnchor="615.4921875" AnchorPane.topAnchor="267.0">
          <children>
             <Label alignment="CENTER" style="-fx-text-fill: #12372A;" text="Sunrise Hotel" textFill="#12372a">
                <font>
@@ -46,7 +46,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="lblMessage" alignment="CENTER" layoutX="83.0" layoutY="183.0" text="Incorrect Password!" textAlignment="CENTER" textFill="#ff1e1e" />
+            <Label fx:id="lblMessage" alignment="CENTER" layoutX="83.0" layoutY="183.0" text="Incorrect Password!" textAlignment="CENTER" textFill="#ff1e1e" visible="false" />
          </children>
       </Group>
    </children>
