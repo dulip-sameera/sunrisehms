@@ -7,5 +7,6 @@ import com.sunrisehms.service.Service;
 
 public interface LoginService extends Service{
     
-    UserDto login(UserLoginDto userLoginDto) throws Exception;    
+    UserDto login(UserLoginDto userLoginDto) throws Exception;
+    void logout() throws Exception;
 }
