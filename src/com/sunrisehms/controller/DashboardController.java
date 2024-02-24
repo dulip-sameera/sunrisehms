@@ -3,6 +3,7 @@ package com.sunrisehms.controller;
 import com.sunrisehms.dto.UserDto;
 import com.sunrisehms.enums.ServiceType;
 import com.sunrisehms.enums.Task;
+import com.sunrisehms.exception.FialedToSaveTheLogException;
 import com.sunrisehms.service.ServiceFactory;
 import com.sunrisehms.service.custom.LoginService;
 import com.sunrisehms.util.UserSession;
@@ -21,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javax.security.auth.login.FailedLoginException;
 
 public class DashboardController implements Initializable {
     
@@ -59,7 +61,10 @@ public class DashboardController implements Initializable {
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (IOException ex) {
+        } catch (FialedToSaveTheLogException fsl) {
+            System.out.println(fsl.getMessage());
+            lblUserDetails.setText("Log out failed! Try Agai!");
+        }catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);

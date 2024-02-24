@@ -4,6 +4,7 @@ package com.sunrisehms.controller;
 import com.sunrisehms.dto.UserDto;
 import com.sunrisehms.dto.UserLoginDto;
 import com.sunrisehms.enums.ServiceType;
+import com.sunrisehms.exception.FialedToSaveTheLogException;
 import com.sunrisehms.exception.WrongPassword;
 import com.sunrisehms.service.ServiceFactory;
 import com.sunrisehms.service.custom.LoginService;
@@ -69,7 +70,10 @@ public class LoginController implements Initializable{
         } catch (WrongPassword wp) {
             lblMessage.setText("Incorrect password!");
             lblMessage.setVisible(true);
-        } catch (Exception ex) {
+        } catch (FialedToSaveTheLogException fsle) {
+            lblMessage.setText("Failed to Log, Try Again!");
+            lblMessage.setVisible(true);
+        }catch (Exception ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

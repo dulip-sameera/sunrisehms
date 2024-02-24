@@ -11,43 +11,39 @@
 
 <AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="1500.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.LoginController">
    <children>
-      <Group layoutX="615.0" layoutY="267.0" AnchorPane.bottomAnchor="384.0" AnchorPane.leftAnchor="615.0" AnchorPane.rightAnchor="615.4921875" AnchorPane.topAnchor="267.0">
+      <Label alignment="CENTER" layoutX="615.0" layoutY="267.0" style="-fx-text-fill: #12372A;" text="Sunrise Hotel" textFill="#12372a">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Group layoutX="632.0" layoutY="368.0">
          <children>
-            <Label alignment="CENTER" style="-fx-text-fill: #12372A;" text="Sunrise Hotel" textFill="#12372a">
-               <font>
-                  <Font name="System Bold" size="48.0" />
-               </font>
-            </Label>
-            <Group layoutY="99.0">
-               <children>
-                  <Label alignment="CENTER" text="User Name :" textFill="#12372a">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtUserName" layoutX="121.0" layoutY="1.0" />
-               </children>
-            </Group>
-            <Group layoutX="3.0" layoutY="148.0">
-               <children>
-                  <Label text="Password   :" textFill="#12372a">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="txtPassword" layoutX="118.0" layoutY="1.0" />
-               </children>
-            </Group>
-            <Button fx:id="btnLogin" alignment="CENTER" layoutX="69.0" layoutY="209.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: #436850;" text="Log In" textAlignment="CENTER" textFill="#fbfada">
+            <Label alignment="CENTER" text="User Name :" textFill="#12372a">
                <font>
                   <Font size="18.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label fx:id="lblMessage" alignment="CENTER" layoutX="83.0" layoutY="183.0" text="Incorrect Password!" textAlignment="CENTER" textFill="#ff1e1e" visible="false" />
+            </Label>
+            <TextField fx:id="txtUserName" layoutX="121.0" layoutY="1.0" />
          </children>
       </Group>
+      <Group layoutX="635.0" layoutY="417.0">
+         <children>
+            <Label text="Password   :" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtPassword" layoutX="118.0" layoutY="1.0" />
+         </children>
+      </Group>
+      <Button fx:id="btnLogin" alignment="CENTER" layoutX="701.0" layoutY="478.0" mnemonicParsing="false" onAction="#login" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: #436850;" text="Log In" textAlignment="CENTER" textFill="#fbfada">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="lblMessage" alignment="CENTER" layoutX="715.0" layoutY="452.0" text="Incorrect Password!" textAlignment="CENTER" textFill="#ff1e1e" visible="false" />
    </children>
 </AnchorPane>
