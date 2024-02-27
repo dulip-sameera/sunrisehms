@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefWidth="1000.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.RoomCategoryMangementController">
+   <children>
+      <Label fx:id="lblUserDetails" layoutX="798.0" layoutY="24.0" text="User : Admin (Admin)" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnLogout" layoutX="863.0" layoutY="60.0" mnemonicParsing="false" onAction="#logout" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #750E21;" text="Log out" textFill="#fbfada">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="251.0" layoutY="49.0" text="Room Category Management" textFill="#12372a">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtSerach" layoutX="169.0" layoutY="215.0" promptText="Enter Category Id" />
+      <Button fx:id="btnSearch" layoutX="332.0" layoutY="215.0" mnemonicParsing="false" onAction="#searchCategory" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #436850;" text="Search" textFill="#fbfada">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnNewUser" layoutX="739.0" layoutY="167.0" mnemonicParsing="false" onAction="#openCategoryCreationForm" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #436850;" text="New Category" textFill="#fbfada">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnGoBack" layoutX="66.0" layoutY="60.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Go Back" textFill="#fbfada">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ScrollPane hbarPolicy="NEVER" layoutX="169.0" layoutY="252.0" prefHeight="342.0" prefWidth="694.0">
+         <content>
+            <TableView fx:id="tblRoomCategories" prefHeight="340.0" prefWidth="692.0" style="-fx-background-color: #ADBC9F;">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="colName" minWidth="0.0" prefWidth="124.0" text="Name" />
+                <TableColumn fx:id="colNoofBeds" prefWidth="142.0" text="No of Beds" />
+                  <TableColumn fx:id="colAC" prefWidth="101.60003662109375" text="AC" />
+                  <TableColumn fx:id="colPrice" prefWidth="124.79998779296875" text="Price" />
+                  <TableColumn fx:id="colAction" prefWidth="124.0" text="Action" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <Label fx:id="lblSearchWarningMsg" layoutX="427.0" layoutY="214.0" text="Invalid Category Id!" textFill="#750e21">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnRefreshTable" layoutX="783.0" layoutY="215.0" mnemonicParsing="false" onAction="#refreshTable" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: #436850;" text="Refresh" textFill="#fbfada">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="50.0" />
+   </padding>
+</AnchorPane>

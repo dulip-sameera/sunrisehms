@@ -4,6 +4,7 @@ package com.sunrisehms.repository;
 import com.sunrisehms.enums.RepositoryType;
 import com.sunrisehms.repository.custom.impl.LogRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.PrivilegeRepositoryImpl;
+import com.sunrisehms.repository.custom.impl.RoomCategoryRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.TaskRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.UserRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.UserStatusRepositoryImpl;
@@ -36,6 +37,8 @@ public class RepositoryFactory {
                 new UserStatusRepositoryImpl();
             case TASK -> 
                 new TaskRepositoryImpl();
+            case ROOM_CATEGORY ->
+                new RoomCategoryRepositoryImpl();
             default ->
                 null;
         };

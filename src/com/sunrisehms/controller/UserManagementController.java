@@ -4,7 +4,6 @@ import com.sunrisehms.dto.UserDto;
 import com.sunrisehms.enums.ServiceType;
 import com.sunrisehms.enums.UserStatus;
 import com.sunrisehms.exception.FailedToSaveTheLogException;
-import com.sunrisehms.repository.custom.UserRepository;
 import com.sunrisehms.service.ServiceFactory;
 import com.sunrisehms.service.custom.LoginService;
 import com.sunrisehms.service.custom.UserService;
@@ -237,7 +236,7 @@ public class UserManagementController implements Initializable {
 
             // add open button
             // create cell factory
-            Callback<TableColumn<UserTableRow, String>, TableCell<UserTableRow, String>> callFactory = (param) -> {
+            Callback<TableColumn<UserTableRow, String>, TableCell<UserTableRow, String>> cellFactory = (param) -> {
 
                 // makeing the table cell containning the button
                 final TableCell<UserTableRow, String> cell = new TableCell<>() {
@@ -288,7 +287,7 @@ public class UserManagementController implements Initializable {
             };
 
             // set the custom factory to action column
-            colAction.setCellFactory(callFactory);
+            colAction.setCellFactory(cellFactory);
 
             List<UserDto> users = userService.getAll();
 

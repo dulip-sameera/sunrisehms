@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="983.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.RoomCategoryCreateFromController">
+   <padding>
+      <Insets bottom="50.0" />
+   </padding>
+   <children>
+      <Label layoutX="303.0" layoutY="38.0" text="Room Category Form" textFill="#12372a">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="361.0" layoutY="146.0" text="Name         :" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="474.0" layoutY="146.0" />
+      <Label layoutX="361.0" layoutY="209.0" text="No of Beds :" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNoOfBeds" layoutX="474.0" layoutY="209.0" />
+      <Label layoutX="361.0" layoutY="263.0" text="Price           :" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPrice" layoutX="474.0" layoutY="263.0" />
+      <Button fx:id="btnCreate" layoutX="395.0" layoutY="367.0" mnemonicParsing="false" onAction="#createCategory" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Create" textFill="#fbfada">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnCancel" layoutX="500.0" layoutY="367.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #750E21;" text="Cancel" textFill="#fbfada">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <CheckBox fx:id="chbAC" layoutX="454.0" layoutY="324.0" mnemonicParsing="false" text="A/C" />
+   </children>
+</AnchorPane>
