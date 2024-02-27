@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane prefHeight="638.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.UserCreationFormController">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="983.0" style="-fx-background-color: #FBFADA;">
+         <padding>
+            <Insets bottom="50.0" />
+         </padding>
+         <children>
+            <Label layoutX="412.0" layoutY="37.0" text="User Form" textFill="#12372a">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnGoBack" layoutX="87.0" layoutY="49.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Back" textFill="#fbfada">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="221.0" layoutY="150.0" text="First Name :" textFill="#12372a">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtFirstName" layoutX="334.0" layoutY="150.0" />
+            <Label layoutX="516.0" layoutY="150.0" text="Last Name :" textFill="#12372a">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtLastName" layoutX="629.0" layoutY="150.0" />
+            <Label layoutX="221.0" layoutY="213.0" text="User Name :" textFill="#12372a">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUserName" layoutX="334.0" layoutY="213.0" />
+            <Label layoutX="516.0" layoutY="213.0" text="Password :" textFill="#12372a">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPassword" layoutX="629.0" layoutY="213.0" />
+            <Label layoutX="221.0" layoutY="267.0" text="Job Title :" textFill="#12372a">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtJobTitle" layoutX="334.0" layoutY="267.0" />
+            <ScrollPane layoutX="208.0" layoutY="345.0">
+               <content>
+                  <ListView fx:id="listTask" prefHeight="272.0" prefWidth="195.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane layoutX="592.0" layoutY="345.0">
+               <content>
+                  <ListView fx:id="listPrivileges" prefHeight="272.0" prefWidth="195.0" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="btnAddPrivilege" layoutX="459.0" layoutY="406.0" mnemonicParsing="false" onAction="#addPrivilege" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Add" textFill="#fbfada">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnRemovePrivilege" layoutX="459.0" layoutY="467.0" mnemonicParsing="false" onAction="#removePrivilege" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Remove" textFill="#fbfada">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="221.0" layoutY="317.0" text="To give permission to the user, add tasks from left side to right side" textFill="#12372a">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnCreate" layoutX="599.0" layoutY="666.0" mnemonicParsing="false" onAction="#createUser" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Create" textFill="#fbfada">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnCancel" layoutX="704.0" layoutY="666.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #750E21;" text="Cancel" textFill="#fbfada">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

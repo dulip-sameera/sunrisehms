@@ -49,4 +49,17 @@ public class UserRepositoryImpl implements UserRepository{
             return null;
         }
     }
+
+    @Override
+    public UserEntity getById(Session session, Long id) throws Exception {
+        String hql = "FROM UserEntity u WHERE u.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("user_name", id);
+        List<UserEntity> users = query.list();
+        if(!users.isEmpty()) {
+            return users.get(0);
+        } else {
+            return null;
+        }        
+    }
 }

@@ -3,6 +3,8 @@ package com.sunrisehms.service;
 
 import com.sunrisehms.enums.ServiceType;
 import com.sunrisehms.service.custom.impl.LoginServiceImpl;
+import com.sunrisehms.service.custom.impl.TaskServiceImpl;
+import com.sunrisehms.service.custom.impl.UserServiceImpl;
 
 public class ServiceFactory {
     
@@ -21,6 +23,8 @@ public class ServiceFactory {
     public Service getService(ServiceType type) {
         return switch (type) {
             case LOGIN -> new LoginServiceImpl();
+            case USER -> new UserServiceImpl();
+            case TASK -> new TaskServiceImpl();
             default -> null;
         };
     } 
