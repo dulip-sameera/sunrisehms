@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="983.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.CustomerCreateFormController">
+   <padding>
+      <Insets bottom="50.0" />
+   </padding>
+   <children>
+      <Label layoutX="370.0" layoutY="37.0" text="Customer Form" textFill="#12372a">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="360.0" layoutY="146.0" text="First Name" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtFirstName" layoutX="474.0" layoutY="146.0" />
+      <Label layoutX="359.0" layoutY="189.0" text="Middle Name" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMiddleName" layoutX="475.0" layoutY="189.0" />
+      <Label layoutX="361.0" layoutY="234.0" text="Last Name" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtLastName" layoutX="474.0" layoutY="235.0" />
+      <Button fx:id="btnCreate" layoutX="395.0" layoutY="422.0" mnemonicParsing="false" onAction="#createCustomer" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #436850;" text="Create" textFill="#fbfada">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnCancel" layoutX="500.0" layoutY="422.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #750E21;" text="Cancel" textFill="#fbfada">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label layoutX="361.0" layoutY="275.0" text="NIC" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNIC" layoutX="474.0" layoutY="275.0" />
+      <Label layoutX="361.0" layoutY="318.0" text="Phone" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPhone" layoutX="474.0" layoutY="318.0" />
+      <Label layoutX="362.0" layoutY="359.0" text="Email" textFill="#12372a">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="473.0" layoutY="359.0" />
+      <Label layoutX="360.0" layoutY="206.0" text="(optional)" />
+      <Label layoutX="364.0" layoutY="378.0" text="(optional)" />
+   </children>
+</AnchorPane>

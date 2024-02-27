@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="983.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.RoomCategoryCreateFromController">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="983.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.RoomCategoryCreateFormController">
    <padding>
       <Insets bottom="50.0" />
    </padding>

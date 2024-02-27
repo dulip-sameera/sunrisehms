@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RoomCategoryCreateFromController implements Initializable {
+public class RoomCategoryCreateFormController implements Initializable {
 
     RoomCategoryService roomCategoryService = (RoomCategoryService) ServiceFactory.getInstance().getService(ServiceType.ROOM_CATEGORY);
 
@@ -60,7 +60,7 @@ public class RoomCategoryCreateFromController implements Initializable {
             goBack(event);
 
         } catch (Exception ex) {
-            Logger.getLogger(RoomCategoryCreateFromController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RoomCategoryCreateFormController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
