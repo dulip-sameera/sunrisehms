@@ -47,6 +47,7 @@ public class LoginServiceImpl implements LoginService {
                     userDto.setLastName(user.getName().getLastName());
                     userDto.setUserName(user.getUserName());
                     userDto.setJobTitle(user.getJobTitle());
+                    userDto.setStatus(user.getUserStatus().getId());
                     if (privileges.isEmpty()) {
                         userDto.setPrivileges(new ArrayList<>());
                     } else {

@@ -93,7 +93,16 @@ public class DashboardController implements Initializable {
 
     @FXML
     void viewUserManagement(ActionEvent event) {
-        System.out.println("user");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/UserManagementView.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

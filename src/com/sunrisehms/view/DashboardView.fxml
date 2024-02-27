@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="900.0" prefWidth="1500.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.DashboardController">
+<AnchorPane id="AnchorPane" prefWidth="1000.0" style="-fx-background-color: #FBFADA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.DashboardController">
    <children>
-      <Button fx:id="btnUserManagement" layoutX="280.0" layoutY="242.0" mnemonicParsing="false" onAction="#viewUserManagement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="User Management" textFill="#fbfada">
+      <Button fx:id="btnUserManagement" layoutX="348.0" layoutY="193.0" mnemonicParsing="false" onAction="#viewUserManagement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="User Management" textFill="#fbfada">
          <font>
             <Font size="18.0" />
          </font>
@@ -16,7 +17,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnRoomCategoryManagement" layoutX="918.0" layoutY="242.0" mnemonicParsing="false" onAction="#viewRoomCategoryMangement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Room Category Management" textFill="#fbfada">
+      <Button fx:id="btnRoomCategoryManagement" layoutX="348.0" layoutY="472.0" mnemonicParsing="false" onAction="#viewRoomCategoryMangement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Room Category Management" textFill="#fbfada">
          <font>
             <Font size="18.0" />
          </font>
@@ -24,7 +25,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnRoomManagement" layoutX="280.0" layoutY="356.0" mnemonicParsing="false" onAction="#viewRoomMangement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Room Management" textFill="#fbfada">
+      <Button fx:id="btnRoomManagement" layoutX="348.0" layoutY="284.0" mnemonicParsing="false" onAction="#viewRoomMangement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Room Management" textFill="#fbfada">
          <font>
             <Font size="18.0" />
          </font>
@@ -32,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnCustomerManagement" layoutX="918.0" layoutY="356.0" mnemonicParsing="false" onAction="#viewCustomerManagement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Customer Management" textFill="#fbfada">
+      <Button fx:id="btnCustomerManagement" layoutX="348.0" layoutY="560.0" mnemonicParsing="false" onAction="#viewCustomerManagement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Customer Management" textFill="#fbfada">
          <font>
             <Font size="18.0" />
          </font>
@@ -40,7 +41,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnReservationManagement" layoutX="600.0" layoutY="531.0" mnemonicParsing="false" onAction="#viewReservationManagement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Reservation Management" textFill="#fbfada">
+      <Button fx:id="btnReservationManagement" layoutX="348.0" layoutY="385.0" mnemonicParsing="false" onAction="#viewReservationManagement" prefHeight="66.0" prefWidth="303.0" style="-fx-background-color: #436850;" text="Reservation Management" textFill="#fbfada">
          <font>
             <Font size="18.0" />
          </font>
@@ -48,12 +49,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="lblUserDetails" layoutX="1166.0" layoutY="40.0" text="User: Admin(Admin)" textFill="#12372a">
+      <Label fx:id="lblUserDetails" layoutX="713.0" layoutY="38.0" text="User: Admin(Admin)" textFill="#12372a">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogout" layoutX="1324.0" layoutY="34.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #750E21;" text="Log out" textFill="#fbfada">
+      <Button fx:id="btnLogout" layoutX="871.0" layoutY="32.0" mnemonicParsing="false" onAction="#logout" prefHeight="36.0" prefWidth="114.0" style="-fx-background-color: #750E21;" text="Log out" textFill="#fbfada">
          <font>
             <Font size="14.0" />
          </font>
@@ -61,10 +62,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="634.0" layoutY="88.0" text="Dashboard" textFill="#12372a">
+      <Label layoutX="377.0" layoutY="78.0" text="Welcome!" textFill="#12372a">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
    </children>
+   <padding>
+      <Insets bottom="50.0" />
+   </padding>
 </AnchorPane>

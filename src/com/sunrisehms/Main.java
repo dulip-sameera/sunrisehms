@@ -18,6 +18,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         stage.setTitle("Sunrise Hotel:HMS");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
