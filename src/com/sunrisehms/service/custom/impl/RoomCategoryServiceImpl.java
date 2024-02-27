@@ -15,6 +15,7 @@ import com.sunrisehms.repository.custom.UserRepository;
 import com.sunrisehms.service.custom.RoomCategoryService;
 import com.sunrisehms.util.SessionFactoryConfiguration;
 import com.sunrisehms.util.UserSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,13 +35,12 @@ public class RoomCategoryServiceImpl implements RoomCategoryService {
         Transaction transaction = session.beginTransaction();
 
         try {
-            RoomCategoryEntity newRoomCategory = new RoomCategoryEntity(
-                    null,
-                    roomCategoryDto.getName(),
-                    roomCategoryDto.getNoOfBeds(),
-                    roomCategoryDto.getAc(),
-                    roomCategoryDto.getPrice()
-            );
+            RoomCategoryEntity newRoomCategory = new RoomCategoryEntity();
+            
+            newRoomCategory.setName(roomCategoryDto.getName());
+            newRoomCategory.setNoOfBeds(roomCategoryDto.getNoOfBeds());
+            newRoomCategory.setPrice(roomCategoryDto.getPrice());
+            newRoomCategory.setAc(roomCategoryDto.getAc());
 
             Integer roomCatId = roomCategoryRepository.save(session, newRoomCategory);
 
