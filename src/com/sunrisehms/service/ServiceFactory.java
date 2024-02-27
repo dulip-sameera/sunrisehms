@@ -3,6 +3,7 @@ package com.sunrisehms.service;
 
 import com.sunrisehms.enums.ServiceType;
 import com.sunrisehms.service.custom.impl.LoginServiceImpl;
+import com.sunrisehms.service.custom.impl.RoomCategoryServiceImpl;
 import com.sunrisehms.service.custom.impl.TaskServiceImpl;
 import com.sunrisehms.service.custom.impl.UserServiceImpl;
 
@@ -25,6 +26,7 @@ public class ServiceFactory {
             case LOGIN -> new LoginServiceImpl();
             case USER -> new UserServiceImpl();
             case TASK -> new TaskServiceImpl();
+            case ROOM_CATEGORY -> new RoomCategoryServiceImpl();
             default -> null;
         };
     } 
