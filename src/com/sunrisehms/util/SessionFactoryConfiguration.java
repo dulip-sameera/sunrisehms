@@ -4,6 +4,8 @@ package com.sunrisehms.util;
 import com.sunrisehms.entity.LogEntity;
 import com.sunrisehms.entity.PrivilegeEntity;
 import com.sunrisehms.entity.RoomCategoryEntity;
+import com.sunrisehms.entity.RoomEntity;
+import com.sunrisehms.entity.RoomStatusEntity;
 import com.sunrisehms.entity.TaskEntity;
 import com.sunrisehms.entity.UserEntity;
 import com.sunrisehms.entity.UserStatusEntity;
@@ -23,7 +25,10 @@ public class SessionFactoryConfiguration {
                 .addAnnotatedClass(TaskEntity.class)
                 .addAnnotatedClass(PrivilegeEntity.class)
                 .addAnnotatedClass(LogEntity.class)
-                .addAnnotatedClass(RoomCategoryEntity.class);
+                .addAnnotatedClass(RoomCategoryEntity.class)
+                .addAnnotatedClass(RoomStatusEntity.class)
+                .addAnnotatedClass(RoomEntity.class);
+        
         sessionFactory = configuration.buildSessionFactory();
     }
     
