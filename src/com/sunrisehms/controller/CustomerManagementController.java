@@ -1,16 +1,19 @@
 package com.sunrisehms.controller;
 
+import com.sunrisehms.dto.CustomerDto;
 import com.sunrisehms.dto.RoomCategoryDto;
+import com.sunrisehms.enums.CustomerStatus;
 import com.sunrisehms.enums.ServiceType;
 import com.sunrisehms.exception.FailedToSaveTheLogException;
 import com.sunrisehms.service.ServiceFactory;
+import com.sunrisehms.service.custom.CustomerService;
 import com.sunrisehms.service.custom.LoginService;
-import com.sunrisehms.service.custom.RoomCategoryService;
+import com.sunrisehms.util.CustomerSingleton;
+import com.sunrisehms.util.CustomerTableRow;
 import com.sunrisehms.util.RoomCategorySinngleton;
 import com.sunrisehms.util.RoomCategoryTableRow;
 import com.sunrisehms.util.UserSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -35,10 +38,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class RoomCategoryMangementController implements Initializable {
+public class CustomerManagementController implements Initializable {
 
+    CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceType.CUSTOMER);
     LoginService loginService = (LoginService) ServiceFactory.getInstance().getService(ServiceType.LOGIN);
-    RoomCategoryService roomCategoryService = (RoomCategoryService) ServiceFactory.getInstance().getService(ServiceType.ROOM_CATEGORY);
 
     @FXML
     private Button btnGoBack;
@@ -47,7 +50,7 @@ public class RoomCategoryMangementController implements Initializable {
     private Button btnLogout;
 
     @FXML
-    private Button btnNewUser;
+    private Button btnNewCustomer;
 
     @FXML
     private Button btnRefreshTable;
@@ -56,31 +59,34 @@ public class RoomCategoryMangementController implements Initializable {
     private Button btnSearch;
 
     @FXML
-    private TableView<RoomCategoryTableRow> tblRoomCategories;
-
-    @FXML
     private TableColumn colAction;
 
     @FXML
-    private TableColumn<RoomCategoryTableRow, String> colName;
+    private TableColumn<CustomerTableRow, String> colEmail;
 
     @FXML
-    private TableColumn<RoomCategoryTableRow, Integer> colId;
+    private TableColumn<CustomerTableRow, String> colFullName;
 
     @FXML
-    private TableColumn<RoomCategoryTableRow, Integer> colNoofBeds;
+    private TableColumn<CustomerTableRow, Long> colId;
 
     @FXML
-    private TableColumn<RoomCategoryTableRow, BigDecimal> colPrice;
+    private TableColumn<CustomerTableRow, String> colNIC;
 
     @FXML
-    private TableColumn<RoomCategoryTableRow, String> colAC;
+    private TableColumn<CustomerTableRow, String> colPhone;
+
+    @FXML
+    private TableColumn<CustomerTableRow, String> colStatus;
 
     @FXML
     private Label lblSearchWarningMsg;
 
     @FXML
     private Label lblUserDetails;
+
+    @FXML
+    private TableView<CustomerTableRow> tblCustomer;
 
     @FXML
     private TextField txtSerach;
@@ -123,9 +129,9 @@ public class RoomCategoryMangementController implements Initializable {
     }
 
     @FXML
-    void openCategoryCreationForm(ActionEvent event) {
+    void openCustomerCreateForm(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomCategoryCreateFormView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/CustomerCreateFormView.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -145,64 +151,38 @@ public class RoomCategoryMangementController implements Initializable {
     }
 
     @FXML
-    void searchCategory(ActionEvent event) {
-
+    void searchCustomer(ActionEvent event) {
         try {
             String searchText = txtSerach.getText();
             if (searchText.equals("")) {
-                lblSearchWarningMsg.setText("Enter Search ID");
+                lblSearchWarningMsg.setText("Enter Customer NIC");
                 lblSearchWarningMsg.setVisible(true);
             } else {
                 lblSearchWarningMsg.setVisible(false);
-                RoomCategoryDto roomCategoryDto = roomCategoryService.get(Integer.valueOf(searchText));
-                if (roomCategoryDto == null) {
-                    lblSearchWarningMsg.setText("Invalid Category ID!");
+                CustomerDto customerDto = customerService.getByNIC(txtSerach.getText());
+                if (customerDto == null) {
+                    lblSearchWarningMsg.setText("Invalid Customer NIC!");
                     lblSearchWarningMsg.setVisible(true);
                 } else {
                     lblSearchWarningMsg.setVisible(false);
-                    String ac = roomCategoryDto.getAc() ? "AC" : "WITHOUT AC";
-                    tblRoomCategories.getItems().clear();
-                    tblRoomCategories.getItems().add(
-                            new RoomCategoryTableRow(
-                                    roomCategoryDto.getId(),
-                                    roomCategoryDto.getName(),
-                                    roomCategoryDto.getNoOfBeds(),
-                                    roomCategoryDto.getPrice(),
-                                    ac
+
+                    String fullName = customerDto.getFirstName() + " " + customerDto.getMiddleName() + " " + customerDto.getLastName();
+                    String email = customerDto.getEmail() == null ? null : customerDto.getEmail();
+                    String status = customerDto.getStatus().equals(CustomerStatus.ACTIVE.getId()) ? CustomerStatus.ACTIVE.getName() : CustomerStatus.DELETED.getName();
+                    tblCustomer.getItems().clear();
+                    tblCustomer.getItems().add(
+                            new CustomerTableRow(
+                                    customerDto.getId(),
+                                    fullName,
+                                    customerDto.getNic(),
+                                    customerDto.getPhone(),
+                                    email,
+                                    status
                             )
                     );
                 }
             }
 
-        } catch (Exception ex) {
-            Logger.getLogger(RoomCategoryMangementController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private void setDataToTable(ObservableList<RoomCategoryTableRow> roomCategoryTableRows) {
-        tblRoomCategories.setItems(roomCategoryTableRows);
-    }
-
-    private void loadTable() {
-        try {
-            List<RoomCategoryDto> roomCategoryDtos = roomCategoryService.getAll();
-            ObservableList<RoomCategoryTableRow> roomCategoryTableRows = FXCollections.observableArrayList();
-
-            for (RoomCategoryDto roomCategoryDto : roomCategoryDtos) {
-                String ac = roomCategoryDto.getAc() ? "AC" : "WITHOUT AC";
-                roomCategoryTableRows.add(
-                        new RoomCategoryTableRow(
-                                roomCategoryDto.getId(),
-                                roomCategoryDto.getName(),
-                                roomCategoryDto.getNoOfBeds(),
-                                roomCategoryDto.getPrice(),
-                                ac
-                        )
-                );
-            }
-
-            setDataToTable(roomCategoryTableRows);
         } catch (Exception ex) {
             Logger.getLogger(RoomCategoryMangementController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -214,14 +194,15 @@ public class RoomCategoryMangementController implements Initializable {
 
         // setup table
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colNoofBeds.setCellValueFactory(new PropertyValueFactory<>("noOfBeds"));
-        colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        colAC.setCellValueFactory(new PropertyValueFactory<>("ac"));
+        colFullName.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        Callback<TableColumn<RoomCategoryTableRow, String>, TableCell<RoomCategoryTableRow, String>> cellFactory = (param) -> {
+        Callback<TableColumn<CustomerTableRow, String>, TableCell<CustomerTableRow, String>> cellFactory = (param) -> {
 
-            final TableCell<RoomCategoryTableRow, String> cell = new TableCell<>() {
+            final TableCell<CustomerTableRow, String> cell = new TableCell<>() {
                 @Override
                 protected void updateItem(String text, boolean empty) {
                     super.updateItem(text, empty);
@@ -233,23 +214,22 @@ public class RoomCategoryMangementController implements Initializable {
                         final Button btnOpen = new Button("Open");
 
                         btnOpen.setOnAction((event) -> {
-                            
 
                             try {
-                                  
-                                    RoomCategoryTableRow r = getTableView().getItems().get(getIndex());
-                                    RoomCategorySinngleton.getInstance().setRoomCategory(r);
 
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomCategoryDetailsView.fxml"));
-                                    Parent root = loader.load();
+                                CustomerTableRow c = getTableView().getItems().get(getIndex());
+                                CustomerSingleton.getInstance().setCustomer(c);
 
-                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                    stage.setScene(new Scene(root));
-                                    stage.show();
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/CustomerDetailsView.fxml"));
+                                Parent root = loader.load();
 
-                                } catch (IOException ex) {
-                                    Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, ex);
-                                }
+                                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                stage.setScene(new Scene(root));
+                                stage.show();
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         });
 
                         setGraphic(btnOpen);
@@ -266,7 +246,38 @@ public class RoomCategoryMangementController implements Initializable {
         colAction.setCellFactory(cellFactory);
 
         loadTable();
+    }
 
+    private void loadTable() {
+        try {
+            List<CustomerDto> customerDtos = customerService.getAll();
+            ObservableList<CustomerTableRow> customerTableRows = FXCollections.observableArrayList();
+
+            for (CustomerDto customerDto : customerDtos) {
+
+                String fullName = customerDto.getFirstName() + " " + customerDto.getMiddleName() + " " + customerDto.getLastName();
+                String email = customerDto.getEmail() == null ? null : customerDto.getEmail();
+                String status = customerDto.getStatus().equals(CustomerStatus.ACTIVE.getId()) ? CustomerStatus.ACTIVE.getName() : CustomerStatus.DELETED.getName();
+                customerTableRows.add(
+                        new CustomerTableRow(
+                                customerDto.getId(),
+                                fullName,
+                                customerDto.getNic(),
+                                customerDto.getPhone(),
+                                email,
+                                status
+                        )
+                );
+            }
+
+            setDataToTable(customerTableRows);
+        } catch (Exception ex) {
+            Logger.getLogger(RoomCategoryMangementController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void setDataToTable(ObservableList<CustomerTableRow> customerTableRows) {
+        tblCustomer.setItems(customerTableRows);
     }
 
 }

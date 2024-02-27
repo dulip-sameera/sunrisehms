@@ -72,7 +72,7 @@ public class RoomCreateFormController implements Initializable {
             goBack(event);
 
         } catch (Exception ex) {
-            Logger.getLogger(RoomCategoryCreateFromController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RoomCategoryCreateFormController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
