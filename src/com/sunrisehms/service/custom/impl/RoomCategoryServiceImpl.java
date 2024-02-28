@@ -190,4 +190,48 @@ public class RoomCategoryServiceImpl implements RoomCategoryService {
         return roomCategoryDtos;
     }
 
+    @Override
+    public RoomCategoryDto getByName(String name) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            RoomCategoryEntity roomCategoryEntity = roomCategoryRepository.getByName(session, name);
+            
+            if (roomCategoryEntity == null) {
+                return null;
+            }
+
+            try {
+                // log
+                LogEntity log = new LogEntity();
+                log.setDateTime(new Date());
+                UserEntity user = userRepository.get(session, UserSession.getInstance().getUser().getId());
+                log.setUser(user);
+                TaskEntity task = taskRepository.get(session, Task.READ_ROOM_CATEGORY.getId());
+                log.setTask(task);
+                logRepository.save(session, log);
+                
+                transaction.commit();
+                
+            } catch (Exception e) {
+                transaction.rollback();
+                throw new Exception("Room Category Log Failure");
+                
+            }
+
+
+            return new RoomCategoryDto(
+                    roomCategoryEntity.getId(),
+                    roomCategoryEntity.getName(),
+                    roomCategoryEntity.getNoOfBeds(),
+                    roomCategoryEntity.getPrice(),
+                    roomCategoryEntity.getAc()
+            );
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new Exception("Room Category Retrieve Failure....!");
+        }
+    }
+
 }

@@ -4,7 +4,9 @@
  */
 package com.sunrisehms.repository.custom.impl;
 
+import com.sunrisehms.entity.RoomCategoryEntity;
 import com.sunrisehms.entity.RoomEntity;
+import com.sunrisehms.entity.RoomStatusEntity;
 import com.sunrisehms.repository.custom.RoomRepository;
 import java.util.List;
 import org.hibernate.Session;
@@ -15,6 +17,7 @@ import org.hibernate.query.Query;
  * @author User
  */
 public class RoomRepositoryImpl implements RoomRepository{
+    
 
     @Override
     public Long save(Session session, RoomEntity entity) throws Exception {
@@ -55,6 +58,25 @@ public class RoomRepositoryImpl implements RoomRepository{
         } else {
             return rooms.get(0);
         }
+    }
+
+    @Override
+    public List<RoomEntity> getAllByStatusAndCategory(Session session, RoomCategoryEntity categoryEntity, RoomStatusEntity roomStatus) throws Exception {
+        String hql = "FROM RoomEntity r where r.roomCategory=:roomCategory and r.roomStatus=:roomStatus";
+        Query query = session.createQuery(hql);
+        query.setParameter("roomCategory", categoryEntity);
+        query.setParameter("roomStatus", roomStatus);
+        
+        return query.list();
+    }
+
+    @Override
+    public List<RoomEntity> getAllByStatus(Session session, RoomStatusEntity roomStatusEntity) throws Exception {
+        String hql = "FROM RoomEntity r where r.roomStatus=:roomStatus";
+        Query query = session.createQuery(hql);
+        query.setParameter("roomStatus", roomStatusEntity);
+        
+        return query.list();
     }
     
 }

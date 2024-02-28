@@ -5,6 +5,10 @@ import com.sunrisehms.repository.custom.impl.CustomerRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.CustomerStatusRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.LogRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.PrivilegeRepositoryImpl;
+import com.sunrisehms.repository.custom.impl.ReservationPackageRepositoryImpl;
+import com.sunrisehms.repository.custom.impl.ReservationRepositoryImpl;
+import com.sunrisehms.repository.custom.impl.ReservationStatusRepositoryImpl;
+import com.sunrisehms.repository.custom.impl.ReservedRoomRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.RoomCategoryRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.RoomRepositoryImpl;
 import com.sunrisehms.repository.custom.impl.RoomStatusRepositoryImpl;
@@ -50,6 +54,15 @@ public class RepositoryFactory {
                 new CustomerStatusRepositoryImpl();
             case CUSTOMER ->
                 new CustomerRepositoryImpl();
+            case RESERVATION -> 
+                new ReservationRepositoryImpl();
+            case RESERVATION_STATUS -> 
+                new ReservationStatusRepositoryImpl();
+            case RESERVATION_PACKAGE ->
+                new ReservationPackageRepositoryImpl();
+            case RESERVED_ROOM -> 
+                new ReservedRoomRepositoryImpl();
+           
             default ->
                 null;
         };

@@ -36,6 +36,20 @@ public class RoomCategoryRepositoryImpl implements RoomCategoryRepository{
         return query.list();
     }
 
+    @Override
+    public RoomCategoryEntity getByName(Session session, String name) throws Exception {
+        String hql = "From RoomCategoryEntity r WHERE r.name =: name";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", name);
+        List<RoomCategoryEntity> entitys = query.list();
+        
+        if (entitys.isEmpty()) {
+            return null;
+        } else {
+            return entitys.get(0);
+        }
+    }
+
     
     
 }
