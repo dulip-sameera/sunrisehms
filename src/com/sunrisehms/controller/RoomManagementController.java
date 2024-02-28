@@ -201,6 +201,13 @@ public class RoomManagementController implements Initializable {
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        
+
+        loadTable();
+    }
+
+    private void loadTable() {
+        
         // add open button
         // create cell factory
         Callback<TableColumn<RoomTableRow, String>, TableCell<RoomTableRow, String>> cellFactory = (param) -> {
@@ -255,11 +262,7 @@ public class RoomManagementController implements Initializable {
 
         // set the custom factory to action column
         colAction.setCellFactory(cellFactory);
-
-        loadTable();
-    }
-
-    private void loadTable() {
+        
         try {
             List<RoomDto> roomDtos = roomService.getAll();
             ObservableList<RoomTableRow> roomTableRows = FXCollections.observableArrayList();

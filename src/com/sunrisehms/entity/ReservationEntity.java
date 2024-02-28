@@ -1,6 +1,8 @@
+
 package com.sunrisehms.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,35 +23,37 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "room")
-public class RoomEntity {
+@Table(name = "reservation")
+public class ReservationEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     
-    @Column(name = "room_no", nullable = false)
-    private Integer roomNo;
+    @Column(name = "start", nullable = false)
+    private Date start;
     
-    @Column(name = "floor", nullable = false)
-    private Integer floor;
+    @Column(name = "end", nullable = false)
+    private Date end;
     
     @Column(name = "price", precision = 10, scale = 2)
     private BigDecimal price;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "room_status_id", nullable = false)
-    private RoomStatusEntity roomStatus;
+    @JoinColumn(name = "reservation_status_id", nullable = false)
+    private ReservationStatusEntity reservationStatusEntity;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerEntity customerEntity;
     
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "room_category_id", nullable = false)
-    private RoomCategoryEntity roomCategory;
-    
+    @JoinColumn(name = "package_id", nullable = false)
+    private ReservationPackageEntity reservationPackageEntity;
     
     @Transient
-    @OneToMany(mappedBy = "roomEntity", targetEntity = ReservedRoomEntity.class)
+    @OneToMany(mappedBy = "reservationEntity", targetEntity = ReservedRoomEntity.class)
     private List<ReservedRoomEntity> reservedRoomEntitys;
-    
 }

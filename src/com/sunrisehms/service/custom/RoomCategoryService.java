@@ -11,4 +11,5 @@ public interface RoomCategoryService extends Service{
     void delete(Integer id) throws Exception;
     RoomCategoryDto get(Integer id) throws Exception;
     List<RoomCategoryDto> getAll() throws Exception;
+    RoomCategoryDto getByName(String name) throws Exception;
 }

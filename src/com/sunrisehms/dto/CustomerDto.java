@@ -18,4 +18,8 @@ public class CustomerDto {
     private String phone;
     private String email;
     private Integer status;
+    
+    public String getFullName() {
+        return firstName + " " + middleName + " " + lastName;
+    }
 }

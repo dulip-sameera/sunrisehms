@@ -5,6 +5,10 @@ import com.sunrisehms.entity.CustomerEntity;
 import com.sunrisehms.entity.CustomerStatus;
 import com.sunrisehms.entity.LogEntity;
 import com.sunrisehms.entity.PrivilegeEntity;
+import com.sunrisehms.entity.ReservationEntity;
+import com.sunrisehms.entity.ReservationPackageEntity;
+import com.sunrisehms.entity.ReservationStatusEntity;
+import com.sunrisehms.entity.ReservedRoomEntity;
 import com.sunrisehms.entity.RoomCategoryEntity;
 import com.sunrisehms.entity.RoomEntity;
 import com.sunrisehms.entity.RoomStatusEntity;
@@ -31,7 +35,11 @@ public class SessionFactoryConfiguration {
                 .addAnnotatedClass(RoomStatusEntity.class)
                 .addAnnotatedClass(RoomEntity.class)
                 .addAnnotatedClass(CustomerStatus.class)
-                .addAnnotatedClass(CustomerEntity.class);
+                .addAnnotatedClass(CustomerEntity.class)
+                .addAnnotatedClass(ReservationStatusEntity.class)
+                .addAnnotatedClass(ReservationEntity.class)
+                .addAnnotatedClass(ReservedRoomEntity.class)
+                .addAnnotatedClass(ReservationPackageEntity.class);
         
         sessionFactory = configuration.buildSessionFactory();
     }

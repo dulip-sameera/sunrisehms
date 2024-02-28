@@ -1,5 +1,6 @@
 package com.sunrisehms.service.custom.impl;
 
+import com.sunrisehms.dto.RoomCategoryDto;
 import com.sunrisehms.dto.RoomDto;
 import com.sunrisehms.entity.LogEntity;
 import com.sunrisehms.entity.RoomCategoryEntity;
@@ -256,6 +257,56 @@ public class RoomServiceImpl implements RoomService {
             transaction.rollback();
             throw new Exception("Room retrieve Failuer");
         }
+    }
+
+    @Override
+    public List<RoomDto> getAllAvailableRoomsByCategory(RoomCategoryDto roomCategoryDto) throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        
+        RoomCategoryEntity categoryEntity = roomCategoryRepository.get(session, roomCategoryDto.getId());
+        RoomStatusEntity roomStatusEntity = roomStatusRepository.get(session, RoomStatus.AVAILABLE.getId());
+        
+        List<RoomEntity> roomEntitys = roomRepository.getAllByStatusAndCategory(session, categoryEntity, roomStatusEntity);
+        
+        List<RoomDto> roomDtos = new ArrayList<>();
+        
+        for (RoomEntity roomEntity : roomEntitys) {
+            roomDtos.add(new RoomDto(
+                    roomEntity.getId(),
+                    roomEntity.getRoomNo(),
+                    roomEntity.getFloor(),
+                    roomEntity.getPrice(),
+                    roomEntity.getRoomStatus().getId(),
+                    roomEntity.getRoomCategory().getId()
+            ));
+        }
+        
+        return roomDtos;
+        
+    }
+
+    @Override
+    public List<RoomDto> getAllAvailableRooms() throws Exception {
+        Session session = SessionFactoryConfiguration.getInstance().getSession();
+        
+        RoomStatusEntity roomStatusEntity = roomStatusRepository.get(session, RoomStatus.AVAILABLE.getId());
+        
+        List<RoomEntity> roomEntitys = roomRepository.getAllByStatus(session, roomStatusEntity);
+        
+        List<RoomDto> roomDtos = new ArrayList<>();
+        
+        for (RoomEntity roomEntity : roomEntitys) {
+            roomDtos.add(new RoomDto(
+                    roomEntity.getId(),
+                    roomEntity.getRoomNo(),
+                    roomEntity.getFloor(),
+                    roomEntity.getPrice(),
+                    roomEntity.getRoomStatus().getId(),
+                    roomEntity.getRoomCategory().getId()
+            ));
+        }
+        
+        return roomDtos;
     }
 
 }

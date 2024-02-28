@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<ScrollPane prefHeight="638.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunrisehms.controller.ReservationCreateFormController">
+   <content>
+      <AnchorPane id="AnchorPane" prefHeight="636.0" prefWidth="1000.0" style="-fx-background-color: #FBFADA;">
+         <children>
+            <Label layoutX="400.0" layoutY="39.0" text="Reservation" textFill="#12372a">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="75.0" layoutY="114.0" text="Customer NIC" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtCustomerNIC" layoutX="224.0" layoutY="115.0" promptText="Enter Customer NIC" />
+            <Button fx:id="btnSearch" layoutX="400.0" layoutY="115.0" mnemonicParsing="false" onAction="#searchCustomer" style="-fx-background-color: #436850;" text="Search" textFill="#fbfada">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="lblSearchWarningMsg" layoutX="224.0" layoutY="149.0" text="Invalid Customer NIC" textFill="#750e21" />
+            <Label fx:id="lblCustomerName" layoutX="541.0" layoutY="114.0" style="-fx-background-color: #12372a;" text="Customer Name : Full Name" textFill="#fbfada">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </Label>
+            <Label fx:id="lblCustomerContact" layoutX="541.0" layoutY="167.0" style="-fx-background-color: #12372a;" text="Customer Contact: Phone" textFill="#fbfada">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+            </Label>
+            <Separator layoutX="75.0" layoutY="240.0" prefHeight="0.0" prefWidth="876.0" />
+            <Label layoutX="75.0" layoutY="267.0" text="From " textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="datePickerFrom" layoutX="137.0" layoutY="268.0" />
+            <Label layoutX="377.0" layoutY="267.0" text="To" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="datePickerTo" layoutX="426.0" layoutY="267.0" />
+            <CheckBox fx:id="chbCheckIn" layoutX="670.0" layoutY="270.0" mnemonicParsing="false" text="CHECK IN" textFill="#12372a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <ComboBox fx:id="cmbPackage" layoutX="161.0" layoutY="318.0" prefWidth="150.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <Label layoutX="75.0" layoutY="317.0" text="Package" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="377.0" layoutY="317.0" text="Status" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cmbStatus" layoutX="452.0" layoutY="318.0" prefWidth="150.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <ComboBox fx:id="cmbRoomCategory" layoutX="224.0" layoutY="373.0" onAction="#comboLoadTable" prefWidth="150.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ComboBox>
+            <Label layoutX="75.0" layoutY="372.0" text="Room Category" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tblRoom" layoutX="75.0" layoutY="410.0" prefHeight="200.0" prefWidth="300.0">
+              <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="colRoomNo" prefWidth="75.0" text="ROOM NO" />
+                  <TableColumn fx:id="colFloor" prefWidth="75.0" text="FLOOR" />
+                  <TableColumn fx:id="colAction" prefWidth="75.0" text="ACTION" />
+              </columns>
+            </TableView>
+            <ListView fx:id="listSelectedRooms" layoutX="477.0" layoutY="410.0" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="btnRemoveRoom" layoutX="704.0" layoutY="410.0" mnemonicParsing="false" onAction="#removeRoom" style="-fx-background-color: #436850;" text="Remove Room" textFill="#fbfada">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label layoutX="477.0" layoutY="372.0" text="Selected Rooms" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="704.0" layoutY="466.0" text="Price" textFill="#12372a">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtPrice" layoutX="779.0" layoutY="467.0" />
+            <Button fx:id="btnReserve" layoutX="704.0" layoutY="510.0" mnemonicParsing="false" onAction="#createReservation" prefHeight="44.0" prefWidth="227.0" style="-fx-background-color: #436850;" text="RESERVE" textFill="#fbfada">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btnCancel" layoutX="704.0" layoutY="566.0" mnemonicParsing="false" onAction="#goBack" prefHeight="44.0" prefWidth="227.0" style="-fx-background-color: #750E21;" text="CANCEL" textFill="#fbfada">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
