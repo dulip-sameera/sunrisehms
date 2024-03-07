@@ -9,6 +9,7 @@ import com.sunrisehms.service.custom.RoomCategoryService;
 import com.sunrisehms.service.custom.RoomService;
 import com.sunrisehms.util.RoomSingleton;
 import com.sunrisehms.util.RoomTableRow;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -20,11 +21,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -79,12 +77,9 @@ public class RoomDetailsController implements Initializable {
             txtRoomNo.clear();
             txtPrice.clear();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomManagementView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "RoomManagementView.fxml", stage);
+            
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);
@@ -100,7 +95,7 @@ public class RoomDetailsController implements Initializable {
             updatedRoom.setFloor(Integer.valueOf(txtFloor.getText()));
             updatedRoom.setRoomCategory(getCategoryId());
             updatedRoom.setRoomStatus(getStatusId());
-            updatedRoom.setPrice(BigDecimal.valueOf(Double.valueOf(txtPrice.getText())));
+            updatedRoom.setPrice(BigDecimal.valueOf(Double.parseDouble(txtPrice.getText())));
 
             roomService.update(updatedRoom);
             goBack(event);

@@ -11,6 +11,7 @@ import com.sunrisehms.service.custom.RoomService;
 import com.sunrisehms.util.RoomSingleton;
 import com.sunrisehms.util.RoomTableRow;
 import com.sunrisehms.util.UserSession;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -22,11 +23,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
@@ -94,12 +92,8 @@ public class RoomManagementController implements Initializable {
     @FXML
     void goBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/DashboardView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "DashboardView.fxml", stage);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);
@@ -112,12 +106,9 @@ public class RoomManagementController implements Initializable {
             loginService.logout();
             UserSession.getInstance().removeSession();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/LoginView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "LoginView.fxml", stage);
+
         } catch (FailedToSaveTheLogException fsl) {
             System.out.println(fsl.getMessage());
             lblUserDetails.setText("Log out failed! Try Agai!");
@@ -131,12 +122,8 @@ public class RoomManagementController implements Initializable {
     @FXML
     void openRoomCreateForm(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomCreateFormView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "RoomCreateFormView.fxml", stage);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);
@@ -190,7 +177,7 @@ public class RoomManagementController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         lblSearchWarningMsg.setVisible(false);
 
         // setup table
@@ -201,13 +188,11 @@ public class RoomManagementController implements Initializable {
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        
-
         loadTable();
     }
 
     private void loadTable() {
-        
+
         // add open button
         // create cell factory
         Callback<TableColumn<RoomTableRow, String>, TableCell<RoomTableRow, String>> cellFactory = (param) -> {
@@ -234,12 +219,8 @@ public class RoomManagementController implements Initializable {
                                 RoomTableRow r = getTableView().getItems().get(getIndex());
                                 RoomSingleton.getInstance().setRoom(r);
 
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomDetailsView.fxml"));
-                                Parent root = loader.load();
-
                                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                                stage.setScene(new Scene(root));
-                                stage.show();
+                                ViewUtil.loadView(getClass(), "RoomDetailsView.fxml", stage);
 
                             } catch (IOException ex) {
                                 Logger.getLogger(UserManagementController.class.getName()).log(Level.SEVERE, null, ex);
@@ -262,7 +243,7 @@ public class RoomManagementController implements Initializable {
 
         // set the custom factory to action column
         colAction.setCellFactory(cellFactory);
-        
+
         try {
             List<RoomDto> roomDtos = roomService.getAll();
             ObservableList<RoomTableRow> roomTableRows = FXCollections.observableArrayList();

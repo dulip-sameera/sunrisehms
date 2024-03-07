@@ -17,6 +17,7 @@ import com.sunrisehms.service.custom.RoomService;
 import com.sunrisehms.util.ReservationSingleton;
 import com.sunrisehms.util.ReservationTableRow;
 import com.sunrisehms.util.RoomTableRow;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -33,11 +34,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -279,12 +277,10 @@ public class ReservationDetailsController implements Initializable {
     @FXML
     void goBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/ReservationMangementView.fxml"));
-            Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "ReservationMangementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);
@@ -347,7 +343,7 @@ public class ReservationDetailsController implements Initializable {
             this.customerDto = customerService.getByNIC(data.getCustomerNic());
 
             beforeUpdateReservationDto = reservationService.get(data.getId());
-            
+
             boolean isCancellable = true;
             Long timDiffInMils = beforeUpdateReservationDto.getFrom().getTime() - new Date().getTime();
             Long timeDiffInHours = TimeUnit.MILLISECONDS.toHours(timDiffInMils);
@@ -356,11 +352,10 @@ public class ReservationDetailsController implements Initializable {
                 isCancellable = false;
             }
             btnCancelReservation.setDisable(!isCancellable);
-            
+
             btnCancelReservation.setDisable(beforeUpdateReservationDto.getStatus().equals(ReservationStatus.DELETED.getId()));
             btnDeleteReservation.setDisable(beforeUpdateReservationDto.getStatus().equals(ReservationStatus.DELETED.getId()));
             btnReserve.setDisable(beforeUpdateReservationDto.getStatus().equals(ReservationStatus.DELETED.getId()));
-            
 
             List<ReservationPackageDto> packageDtos = reservationPackageService.getAll();
             packageDtos.forEach((packageDto) -> {
@@ -428,10 +423,8 @@ public class ReservationDetailsController implements Initializable {
             datePickerFrom.setValue(beforeUpdateReservationDto.getFrom().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             datePickerTo.setValue(beforeUpdateReservationDto.getTo().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
-            
-
             SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            
+
             // setup checkin
             // if there is a checkin date available, then show the lable, otherwise show checkin check box
             if (beforeUpdateReservationDto.getCheckIn() == null) {
@@ -442,7 +435,6 @@ public class ReservationDetailsController implements Initializable {
                 lblCheckInTime.setText("CHECK IN @ " + dateFormatter.format(beforeUpdateReservationDto.getCheckIn()));
                 lblCheckInTime.setVisible(true);
             }
-            
 
             // setup checkout
             // if there is a checkout date available, then show the lable, otherwise show checkout check box

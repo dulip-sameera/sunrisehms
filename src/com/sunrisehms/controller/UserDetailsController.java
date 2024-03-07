@@ -9,6 +9,7 @@ import com.sunrisehms.service.custom.TaskService;
 import com.sunrisehms.service.custom.UserService;
 import com.sunrisehms.util.UserSingelton;
 import com.sunrisehms.util.UserTableRow;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,11 +21,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -100,12 +98,8 @@ public class UserDetailsController implements Initializable {
     void deleteUser(ActionEvent event) {
         try {
             userService.delete(data.getId());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/UserManagementView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "UserManagementView.fxml", stage);
         } catch (Exception ex) {
             Logger.getLogger(UserDetailsController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -121,13 +115,8 @@ public class UserDetailsController implements Initializable {
             txtPassword.setText("");
             txtJobTitle.setText("");
             listPrivileges.getItems().clear();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/UserManagementView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "UserManagementView.fxml", stage);
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);

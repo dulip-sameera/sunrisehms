@@ -6,6 +6,7 @@ import com.sunrisehms.service.ServiceFactory;
 import com.sunrisehms.service.custom.RoomCategoryService;
 import com.sunrisehms.util.RoomCategorySinngleton;
 import com.sunrisehms.util.RoomCategoryTableRow;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
@@ -14,11 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -69,12 +67,9 @@ public class RoomCategoryDetailsController implements Initializable {
             txtNoOfBeds.clear();
             txtPrice.clear();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomCategoryMangementView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "RoomCategoryMangementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);
@@ -103,12 +98,12 @@ public class RoomCategoryDetailsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         data = RoomCategorySinngleton.getInstance().getRoomCategory();
-        
+
         txtName.setText(data.getName());
         txtNoOfBeds.setText(data.getNoOfBeds().toString());
         txtPrice.setText(data.getPrice().toString());
         chbAC.setSelected(data.getAc().equals("AC"));
-        
+
     }
 
 }

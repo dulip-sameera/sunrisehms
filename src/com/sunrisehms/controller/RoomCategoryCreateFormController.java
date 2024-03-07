@@ -4,17 +4,15 @@ import com.sunrisehms.dto.RoomCategoryDto;
 import com.sunrisehms.enums.ServiceType;
 import com.sunrisehms.service.ServiceFactory;
 import com.sunrisehms.service.custom.RoomCategoryService;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -72,12 +70,9 @@ public class RoomCategoryCreateFormController implements Initializable {
             txtNoOfBeds.clear();
             txtPrice.clear();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomCategoryMangementView.fxml"));
-            Parent root = loader.load();
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+            ViewUtil.loadView(getClass(), "RoomCategoryMangementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null,
                     ex);

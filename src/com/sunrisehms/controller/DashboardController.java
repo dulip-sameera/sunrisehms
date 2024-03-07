@@ -7,6 +7,7 @@ import com.sunrisehms.exception.FailedToSaveTheLogException;
 import com.sunrisehms.service.ServiceFactory;
 import com.sunrisehms.service.custom.LoginService;
 import com.sunrisehms.util.UserSession;
+import com.sunrisehms.util.ViewUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,19 +15,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javax.security.auth.login.FailedLoginException;
 
 public class DashboardController implements Initializable {
-    
-    LoginService loginService = (LoginService)ServiceFactory.getInstance().getService(ServiceType.LOGIN);
+
+    LoginService loginService = (LoginService) ServiceFactory.getInstance().getService(ServiceType.LOGIN);
 
     @FXML
     private Button btnCustomerManagement;
@@ -54,17 +51,14 @@ public class DashboardController implements Initializable {
         try {
             loginService.logout();
             UserSession.getInstance().removeSession();
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/LoginView.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ViewUtil.loadView(getClass(), "LoginView.fxml", stage);
+
         } catch (FailedToSaveTheLogException fsl) {
             System.out.println(fsl.getMessage());
             lblUserDetails.setText("Log out failed! Try Agai!");
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,12 +68,10 @@ public class DashboardController implements Initializable {
     @FXML
     void viewCustomerManagement(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/CustomerManagementView.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ViewUtil.loadView(getClass(), "CustomerManagementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -88,12 +80,10 @@ public class DashboardController implements Initializable {
     @FXML
     void viewReservationManagement(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/ReservationMangementView.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ViewUtil.loadView(getClass(), "ReservationMangementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -102,12 +92,10 @@ public class DashboardController implements Initializable {
     @FXML
     void viewRoomCategoryMangement(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomCategoryMangementView.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ViewUtil.loadView(getClass(), "RoomCategoryMangementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -116,12 +104,10 @@ public class DashboardController implements Initializable {
     @FXML
     void viewRoomMangement(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/RoomManagementView.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ViewUtil.loadView(getClass(), "RoomManagementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,12 +116,10 @@ public class DashboardController implements Initializable {
     @FXML
     void viewUserManagement(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sunrisehms/view/UserManagementView.fxml"));
-            Parent root = loader.load();
-            
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ViewUtil.loadView(getClass(), "UserManagementView.fxml", stage);
+
         } catch (IOException ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -144,24 +128,25 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         UserDto currentUser = UserSession.getInstance().getUser();
-        lblUserDetails.setText("User: " + currentUser.getUserName()+"("+currentUser.getJobTitle().toUpperCase()+")");
-        
+        lblUserDetails.setText("User: " + currentUser.getUserName() + "(" + currentUser.getJobTitle().toUpperCase() + ")");
+
         btnUserManagement.setDisable(!havePermission(currentUser, Task.CREATE_USER, Task.READ_USER, Task.UPDATE_USER, Task.DELETE_USER));
-        btnRoomCategoryManagement.setDisable(!havePermission(currentUser, Task.CREATE_ROOM_CATEGORY,Task.READ_ROOM_CATEGORY, Task.UPDATE_ROOM_CATEGORY, Task.DELETE_ROOM_CATEGORY));
+        btnRoomCategoryManagement.setDisable(!havePermission(currentUser, Task.CREATE_ROOM_CATEGORY, Task.READ_ROOM_CATEGORY, Task.UPDATE_ROOM_CATEGORY, Task.DELETE_ROOM_CATEGORY));
         btnRoomManagement.setDisable(!havePermission(currentUser, Task.CREATE_ROOM, Task.READ_ROOM, Task.UPDATE_ROOM, Task.DELETE_ROOM));
         btnCustomerManagement.setDisable(!havePermission(currentUser, Task.CREATE_CUSTOMER, Task.READ_CUSTOMER, Task.UPDATE_CUSTOMER, Task.DELETE_CUSTOMER));
         btnReservationManagement.setDisable(!havePermission(currentUser, Task.CREATE_RESERVATION, Task.READ_RESERVATION, Task.UPDATE_RESERVATION, Task.DELETE_RESERVATION, Task.CANCEL_RESERVATION));
-        
+
     }
-    
-    
+
     private boolean havePermission(UserDto user, Task... tasks) {
         for (Integer privilege : user.getPrivileges()) {
             for (Task task : tasks) {
-                if (privilege.equals(task.getId())) return true;
+                if (privilege.equals(task.getId())) {
+                    return true;
+                }
             }
         }
-        
+
         return false;
     }
 
